@@ -12,6 +12,11 @@ const mapEnv = () => {
     },
     app: {
       port: process.env.APP_PORT || '',
+      client: process.env.CLIENT_URL || '',
+    },
+    jwt: {
+      jwtAccessSecret: process.env.JWT_ACCESS_SECRET || '',
+      jwtRefreshSecret: process.env.JWT_REFRESH_SECRET || '',
     },
   };
 

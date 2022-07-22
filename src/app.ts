@@ -1,29 +1,38 @@
-import bodyParser from 'body-parser';
+import 'module-alias/register';
+
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import 'dotenv/config';
 import express from 'express';
-import 'module-alias/register';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+
 import { swaggerConfig } from './configs';
-import './configs/db';
+import { errorMiddleware } from './middlewares';
 import { authRouter } from './routes';
 import { envUtil } from './utils';
-const app = express();
+import './configs/db';
 
 const {
-  app: { port },
+  app: { port, client },
 } = envUtil.getEnv();
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+const app = express();
+
+app.use(express.json());
+app.use(cookieParser());
+app.use(
+  cors({
+    credentials: true,
+    origin: client,
+  }),
+);
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerConfig)));
 
 app.use('/auth', authRouter);
-
-app.get('/', async (req, res) => {
-  res.send('The sedulous hyena ate the antelope!');
-});
+app.use(errorMiddleware);
 
 app.listen(port, () => {
-  return console.log(`server is listening on ${port}`);
+  console.log(`server is listening on ${port}`);
 });

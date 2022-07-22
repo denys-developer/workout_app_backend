@@ -6,12 +6,11 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["./*"],
+    }
   },
   "lib": ["es2015"],
-  "baseUrl": "./src",
-  "paths": {
-    "@root/*": ["./*"],
-    "@utils/*": ["./utils*"]
-  }
 }
