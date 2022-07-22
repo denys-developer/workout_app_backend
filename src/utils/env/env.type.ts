@@ -9,9 +9,16 @@ export interface IMongoOptions {
 
 export interface IAppOptions {
   port: string;
+  client: string;
+}
+
+export interface IJwtOptions {
+  jwtAccessSecret: string;
+  jwtRefreshSecret: string;
 }
 
 export interface IEnv {
   mongo: IMongoOptions;
   app: IAppOptions;
+  jwt: IJwtOptions;
 }

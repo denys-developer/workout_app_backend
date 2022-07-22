@@ -1,7 +1,19 @@
-import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+import { Schema, model, models } from 'mongoose';
 
-const User = new mongoose.Schema({
-  name: String,
+const User = new Schema({
+  password: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
 });
 
-export default mongoose.model('User', User);
+User.methods.comparePassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
+};
+
+export default models.User || model('User', User);

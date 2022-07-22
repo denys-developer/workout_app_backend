@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import { signUp } from '../controlers';
+
+import { UserController } from '@/controllers';
 
 const router = Router();
 
-router.post('/sign-up', async (req, res) => {
-  await signUp(req.body);
-  res.send('Birds home page');
-});
+router.post('/sign-up', UserController.signUp);
+router.post('/sign-in', UserController.signIn);
+router.get('/refresh', UserController.refresh);
 
 export default router;

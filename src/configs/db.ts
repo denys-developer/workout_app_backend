@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import { envUtil } from '../utils';
+
+import { envUtil } from '@/utils';
 
 const {
   mongo: { userName, password, hostName, port, db, authSource },
@@ -10,5 +11,6 @@ const url = `mongodb://${userName}:${password}@${hostName}:${port}/${db}?authSou
 try {
   mongoose.connect(url);
 } catch (err) {
+  console.log('!!!!');
   console.log(err);
 }
