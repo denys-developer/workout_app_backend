@@ -18,24 +18,20 @@ passport.use(
       callbackURL: '/auth/google/callback',
     },
     async (accessToken, refreshToken, profile, done) => {
-      const existingUser = await User.findOne({ googleId: profile.id });
-      if (existingUser) {
-        const id = existingUser._id.toString();
-        const token = jwt.sign({ id }, jwtAccessSecret);
-        return done(null, token);
-      } else {
+      let user = await User.findOne({ googleId: profile.id });
+      if (!user) {
         const email = profile.emails[0].value;
         const picture = profile.photos[0].value;
-        const newUser = new User({
+        user = new User({
           googleId: profile.id,
           email,
           picture,
         });
-        await newUser.save();
-        const id = newUser._id.toString();
-        const token = jwt.sign({ id }, jwtAccessSecret);
-        return done(null, token);
+        await user.save();
       }
+      const id = user._id.toString();
+      const token = jwt.sign({ id }, jwtAccessSecret);
+      return done(null, token);
     },
   ),
 );

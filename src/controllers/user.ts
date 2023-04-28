@@ -21,7 +21,7 @@ class UserController {
 
       const user = new UserModel({ email, password });
       user.save();
-      res.send({});
+      res.send({ message: 'User was created successfully!' });
     } catch (e) {
       next(e);
     }
@@ -36,7 +36,7 @@ class UserController {
       if (!match) return res.status(401).json({ message: 'Authentication failed.' });
       const id = user._id.toString();
       const token = jwt.sign({ id }, jwtAccessSecret);
-      res.send({ token });
+      res.status(200).json({ message: 'Login successful', token });
     } catch (e) {
       next(e);
     }
