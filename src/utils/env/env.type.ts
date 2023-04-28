@@ -1,10 +1,5 @@
 export interface IMongoOptions {
-  userName: string;
-  password: string;
-  hostName: string;
-  port: string;
   db: string;
-  authSource: string;
 }
 
 export interface IAppOptions {
@@ -12,13 +7,14 @@ export interface IAppOptions {
   client: string;
 }
 
-export interface IJwtOptions {
-  jwtAccessSecret: string;
-  jwtRefreshSecret: string;
+export interface IGoogleOptions {
+  clientID: string;
+  clientSecret: string;
 }
 
 export interface IEnv {
   mongo: IMongoOptions;
   app: IAppOptions;
-  jwt: IJwtOptions;
+  google: IGoogleOptions;
+  jwtAccessSecret: string;
 }
