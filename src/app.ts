@@ -8,12 +8,13 @@ import session from 'express-session';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 
-import { authRouter } from '@/routes';
+import { authRouter, exercisesRouter } from '@/routes';
 
 import { swaggerConfig } from './configs';
 import { envUtil } from './utils';
 
 import './configs/db';
+import './services/crone';
 import './services/passport';
 
 const {
@@ -53,6 +54,7 @@ app.use((err, req, res, next) => {
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerConfig)));
 
 app.use('/auth', authRouter);
+app.use('/exercises', exercisesRouter);
 
 app.listen(port, () => {
   console.log(`server is listening on ${port}`);

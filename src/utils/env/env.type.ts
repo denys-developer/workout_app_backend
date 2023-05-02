@@ -12,9 +12,15 @@ export interface IGoogleOptions {
   clientSecret: string;
 }
 
+export interface IWorkoutApiOptions {
+  apiToken: string;
+  api: string;
+}
+
 export interface IEnv {
   mongo: IMongoOptions;
   app: IAppOptions;
   google: IGoogleOptions;
+  workout: IWorkoutApiOptions;
   jwtAccessSecret: string;
 }
