@@ -14,6 +14,10 @@ const mapEnv = () => {
       clientID: process.env.GOOGLE_CLIENT_ID || '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
     },
+    workout: {
+      apiToken: process.env.WORKOUT_API_TOKEN || '',
+      api: process.env.WORKOUT_API || '',
+    },
   };
 
   return Object.freeze(parsed);
