@@ -16,6 +16,7 @@ import { envUtil } from './utils';
 import './configs/db';
 import './services/crone';
 import './services/passport';
+import './services/redis';
 
 const {
   app: { port, client },
