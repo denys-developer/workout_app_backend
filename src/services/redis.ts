@@ -1,7 +1,6 @@
 import { createClient } from 'redis';
 
 const redisClient = createClient();
-
 redisClient.connect().catch(console.error);
 
 redisClient.on('error', (err) => console.log('Redis error:', err));

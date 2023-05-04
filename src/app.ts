@@ -8,7 +8,7 @@ import session from 'express-session';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 
-import { authRouter, exercisesRouter } from '@/routes';
+import { authRouter, exercisesRouter, usersRouter } from '@/routes';
 
 import { swaggerConfig } from './configs';
 import { envUtil } from './utils';
@@ -55,6 +55,7 @@ app.use((err, req, res, next) => {
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerConfig)));
 
 app.use('/auth', authRouter);
+app.use('/users', usersRouter);
 app.use('/exercises', exercisesRouter);
 
 app.listen(port, () => {
