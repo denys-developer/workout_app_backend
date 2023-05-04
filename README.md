@@ -1,3 +1,5 @@
+Link on frontend side: https://github.com/denys-developer/workout_app_front_end
+
 Node v18.12.1.
 
 You need to have Docker installed
