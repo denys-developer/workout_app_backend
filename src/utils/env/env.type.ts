@@ -17,10 +17,15 @@ export interface IWorkoutApiOptions {
   api: string;
 }
 
+export interface IFirebaseOptions {
+  storageBucket: string;
+}
+
 export interface IEnv {
   mongo: IMongoOptions;
   app: IAppOptions;
   google: IGoogleOptions;
   workout: IWorkoutApiOptions;
+  firebase: IFirebaseOptions;
   jwtAccessSecret: string;
 }

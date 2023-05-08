@@ -10,4 +10,6 @@ How run:
 
 2. yarn
 
-3. yarn start
+3. generate Firebase SDK and add "firebase.json" file in root folder.
+
+4. yarn start
