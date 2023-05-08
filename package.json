@@ -5,6 +5,7 @@
   "main": "dist/app.js",
   "scripts": {
     "start": "tsc && nodemon src/app.ts",
+    "build": "tsc && cp -r src/public dist/",
     "prepare": "husky install"
   },
   "author": "",
