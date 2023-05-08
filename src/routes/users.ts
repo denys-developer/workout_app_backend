@@ -7,6 +7,6 @@ const router = Router();
 const upload = multer({ dest: 'uploads/' });
 
 router.get('/get-active', UserController.getActive);
-router.put('/', upload.single('picture'), UserController.updateUser);
+router.put('/:id', upload.single('picture'), UserController.updateUser);
 
 export default router;
