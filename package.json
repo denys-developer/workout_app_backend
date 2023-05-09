@@ -5,8 +5,10 @@
   "main": "dist/app.js",
   "scripts": {
     "start": "tsc && nodemon src/app.ts",
-    "build": "tsc",
-    "prepare": "husky install"
+    "build": "rimraf dist && tsc",
+    "prepare": "husky install",
+    "add-build": "git add dist",
+    "ts.check": "tsc --project tsconfig.json"
   },
   "author": "",
   "license": "ISC",
@@ -28,7 +30,9 @@
     "husky": "^8.0.1",
     "link-module-alias": "^1.2.0",
     "nodemon": "^2.0.19",
+    "pre-commit": "^1.2.2",
     "prettier": "^2.7.1",
+    "rimraf": "^5.0.0",
     "ts-node": "^10.8.2",
     "tslint": "^5.12.1",
     "typescript": "^4.7.4",
@@ -62,5 +66,10 @@
   },
   "_moduleAliases": {
     "@": "dist"
-  }
+  },
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+  ]
 }
