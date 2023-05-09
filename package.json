@@ -4,7 +4,8 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "start": "tsc && nodemon src/app.ts",
+    "dev": "tsc && nodemon src/app.ts",
+    "start": "node dist/app.js",
     "build": "tsc && npm run postbuild",
     "postbuild": "tscpaths -p tsconfig.json -s ./src -o ./dist",
     "ts.check": "tsc --project tsconfig.json",
