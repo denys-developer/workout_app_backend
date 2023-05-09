@@ -4,11 +4,11 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "start": "tsc && nodemon src/app.ts",
+    "start": "nodemon src/app.ts",
     "build": "rimraf dist && tsc",
-    "prepare": "husky install",
+    "ts.check": "tsc --project tsconfig.json",
     "add-build": "git add dist",
-    "ts.check": "tsc --project tsconfig.json"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
