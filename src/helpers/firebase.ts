@@ -22,7 +22,7 @@ const getImageDownloadUrl = async (filename) => {
   const file = bucket.file(`avatars/${filename}`);
   const options: GetSignedUrlConfig = {
     action: 'read',
-    expires: null,
+    expires: Date.now() + 1000 * 60 * 10,
   };
 
   const [url] = await file.getSignedUrl(options);
