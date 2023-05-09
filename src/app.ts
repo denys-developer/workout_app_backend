@@ -8,9 +8,8 @@ import session from 'express-session';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 
-import { authRouter, exercisesRouter, usersRouter } from '@/routes';
-
 import { swaggerConfig } from './configs';
+import { authRouter, exercisesRouter, usersRouter } from './routes';
 import { envUtil } from './utils';
 
 import './configs/db';
