@@ -10,8 +10,19 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-    }
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "tsconfig-paths",
+        "baseUrl": "./dist",
+        "paths": {
+          "@/*": ["*"]
+        }
+      }
+    ]
   },
-  "include": ["./src/**/*"]
+  "include": ["src/**/*.ts"]
 }
