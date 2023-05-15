@@ -1,13 +1,12 @@
-import jwt from 'jsonwebtoken';
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 
+import { generateAuthTokens } from '@/helpers';
 import User from '@/models/user';
 import { envUtil } from '@/utils';
 
 const {
   google: { clientID, clientSecret },
-  jwtAccessSecret,
 } = envUtil.getEnv();
 
 passport.use(
@@ -29,9 +28,9 @@ passport.use(
         });
         await user.save();
       }
-      const id = user._id.toString();
-      const token = jwt.sign({ id }, jwtAccessSecret);
-      return done(null, token);
+      const tokens = generateAuthTokens(user._id);
+
+      return done(null, tokens);
     },
   ),
 );

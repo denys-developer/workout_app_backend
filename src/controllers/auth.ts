@@ -1,12 +1,13 @@
-import jwt from 'jsonwebtoken';
 import * as validator from 'validator';
 
+import { TokenTypes } from '@/constants';
+import { decodeAuthTokenByType, generateAuthTokenByType, generateAuthTokens } from '@/helpers';
 import { UserModel } from '@/models';
 import { envUtil } from '@/utils';
 
 const {
   app: { client },
-  jwtAccessSecret,
+  tokens: { accessTokenSecret, refreshTokenSecret },
 } = envUtil.getEnv();
 
 class AuthController {
@@ -27,16 +28,33 @@ class AuthController {
     }
   }
 
+  async refreshToken(req, res, next) {
+    try {
+      const { refreshToken } = req.body;
+      try {
+        const { id } = decodeAuthTokenByType(refreshToken, TokenTypes.RefreshToken);
+        const accessToken = generateAuthTokenByType(id, TokenTypes.AccessToken);
+        res.json({ accessToken });
+      } catch (err) {
+        res.status(401).json({ message: 'Invalid token' });
+      }
+    } catch (e) {
+      next(e);
+    }
+  }
+
   async signIn(req, res, next) {
     try {
       const { email, password } = req.body;
       const user = await UserModel.findOne({ email });
+
       if (!user) return res.status(401).json({ message: 'Authentication failed.' });
       const match = await user.comparePassword(password);
       if (!match) return res.status(401).json({ message: 'Authentication failed.' });
-      const id = user._id.toString();
-      const token = jwt.sign({ id }, jwtAccessSecret);
-      res.status(200).json({ message: 'Login successful', token });
+
+      const tokens = generateAuthTokens(user._id);
+
+      res.status(200).json({ message: 'Login successful', ...tokens });
     } catch (e) {
       next(e);
     }
@@ -44,8 +62,8 @@ class AuthController {
 
   googleAuthCallback(req, res, next) {
     try {
-      const token = req?.user;
-      res.redirect(`${client}/google-auth/${token}`);
+      const { jwtAccessToken, jwtRefreshToken } = req?.user;
+      res.redirect(`${client}/google-auth/${jwtAccessToken}/${jwtRefreshToken}`);
     } catch (e) {
       next(e);
     }
