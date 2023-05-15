@@ -5,6 +5,7 @@ import { AuthController } from '@/controllers';
 
 const router = Router();
 
+router.post('/refresh-token', AuthController.refreshToken);
 router.post('/sign-up', AuthController.signUp);
 router.post('/sign-in', AuthController.signIn);
 

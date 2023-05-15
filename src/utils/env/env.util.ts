@@ -11,7 +11,6 @@ const mapEnv = () => {
       port: process.env.APP_PORT || '',
       client: process.env.CLIENT_URL || '',
     },
-    jwtAccessSecret: process.env.JWT_ACCESS_SECRET || '',
     google: {
       clientID: process.env.GOOGLE_CLIENT_ID || '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
@@ -22,6 +21,10 @@ const mapEnv = () => {
     workout: {
       apiToken: process.env.WORKOUT_API_TOKEN || '',
       api: process.env.WORKOUT_API || '',
+    },
+    tokens: {
+      refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET || '',
+      accessTokenSecret: process.env.ACCESS_TOKEN_SECRET || '',
     },
   };
 

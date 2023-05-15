@@ -21,11 +21,16 @@ export interface IFirebaseOptions {
   storageBucket: string;
 }
 
+export interface ITokensOptions {
+  refreshTokenSecret: string;
+  accessTokenSecret: string;
+}
+
 export interface IEnv {
   mongo: IMongoOptions;
   app: IAppOptions;
   google: IGoogleOptions;
   workout: IWorkoutApiOptions;
   firebase: IFirebaseOptions;
-  jwtAccessSecret: string;
+  tokens: ITokensOptions;
 }
