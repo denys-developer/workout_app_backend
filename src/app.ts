@@ -11,7 +11,6 @@ import swaggerUi from 'swagger-ui-express';
 import { swaggerConfig } from './configs';
 import { authRouter, exercisesRouter, usersRouter } from './routes';
 import { envUtil } from './utils';
-
 import './configs/db';
 import './services/crone';
 import './services/passport';

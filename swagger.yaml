@@ -1,0 +1,31 @@
+openapi: 3.0.0
+info:
+  title: Your API Title
+  description: Your API Description
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /your-route:
+    get:
+      summary: Get endpoint summary
+      description: Get endpoint description
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
