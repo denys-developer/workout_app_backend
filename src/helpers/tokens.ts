@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken';
 import { TokenTypes } from '@/constants';
 import { envUtil } from '@/utils';
 
+import type { IDecodedToken } from '@/types';
+
 const {
   tokens: { accessTokenSecret, refreshTokenSecret },
 } = envUtil.getEnv();
@@ -12,7 +14,7 @@ const getAuthTokenSecretByType = (tokenType: TokenTypes) =>
 
 export const decodeAuthTokenByType = (token, tokenType: TokenTypes) => {
   const tokenSecret = getAuthTokenSecretByType(tokenType);
-  return jwt.verify(token, tokenSecret) as { id: string };
+  return jwt.verify(token, tokenSecret) as IDecodedToken;
 };
 
 export const generateAuthTokenByType = (id, tokenType: TokenTypes) => {
@@ -31,3 +33,5 @@ export const generateAuthTokens = (userId: string) => {
 
   return { jwtAccessToken, jwtRefreshToken };
 };
+
+export const isTokenExpired = (exp: number) => new Date(exp * 1000) < new Date();
